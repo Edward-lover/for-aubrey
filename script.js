@@ -1,22 +1,15 @@
-const yesButton =
-    document.getElementById("yesButton");
+const yesButton = document.getElementById("yesButton");
+const noButton = document.getElementById("noButton");
 
-const noButton =
-    document.getElementById("noButton");
+const message = document.getElementById("message");
 
-const message =
-    document.getElementById("message");
-
-const letter =
-    document.getElementById("letter");
-
-const closeButton =
-    document.getElementById("closeButton");
+const letter = document.getElementById("letter");
+const closeButton = document.getElementById("closeButton");
 
 
-/*
-    YES BUTTON
-*/
+// ================================
+// YES BUTTON 💗
+// ================================
 
 yesButton.addEventListener("click", function () {
 
@@ -27,9 +20,9 @@ yesButton.addEventListener("click", function () {
 });
 
 
-/*
-    CLOSE LETTER
-*/
+// ================================
+// CLOSE LETTER
+// ================================
 
 closeButton.addEventListener("click", function () {
 
@@ -38,10 +31,7 @@ closeButton.addEventListener("click", function () {
 });
 
 
-/*
-    Click outside the letter
-*/
-
+// Close when clicking outside
 letter.addEventListener("click", function (event) {
 
     if (event.target === letter) {
@@ -53,69 +43,68 @@ letter.addEventListener("click", function (event) {
 });
 
 
-/*
-    Messages when NO escapes
-*/
+// ================================
+// NO BUTTON 😂
+// ================================
 
-const messages = [
-    "Are you sure? 👀",
+const funnyMessages = [
     "Hehehe, nice try! 😂",
-    "You can't catch me! 🏃",
-    "Try YES instead 💕",
-    "Nope nope nope! 😭",
-    "The button is running away!",
+    "Catch me if you can! 🏃💨",
+    "Nope! 💕",
+    "Almost! Try again! 😂",
+    "I'm too fast! 😎",
+    "The NO button is shy 👉👈",
     "Why are you chasing me?! 😂",
-    "YES is looking pretty nice... 👀"
+    "Just press YES already! 💗"
 ];
 
 
-/*
-    Move the NO button
-*/
-
 function moveNoButton() {
 
-    const width =
-        noButton.offsetWidth;
+    // Get the size of the button
+    const buttonWidth = noButton.offsetWidth;
+    const buttonHeight = noButton.offsetHeight;
 
-    const height =
-        noButton.offsetHeight;
+    // Space from screen edges
+    const padding = 20;
 
-    const padding = 15;
-
+    // Maximum possible position
     const maxX =
         window.innerWidth -
-        width -
+        buttonWidth -
         padding;
 
     const maxY =
         window.innerHeight -
-        height -
+        buttonHeight -
         padding;
 
-    const x =
-        Math.random() *
-        Math.max(maxX, padding);
+    // Random position
+    const randomX =
+        padding +
+        Math.random() * (maxX - padding);
 
-    const y =
-        Math.random() *
-        Math.max(maxY, padding);
+    const randomY =
+        padding +
+        Math.random() * (maxY - padding);
 
 
+    // Make it move around the SCREEN
     noButton.style.position = "fixed";
 
-    noButton.style.left = `${x}px`;
+    noButton.style.left =
+        randomX + "px";
 
-    noButton.style.top = `${y}px`;
+    noButton.style.top =
+        randomY + "px";
 
-    noButton.style.zIndex = "200";
 
-
+    // Funny message
     const randomMessage =
-        messages[
+        funnyMessages[
             Math.floor(
                 Math.random() *
-                messages.length
+                funnyMessages.length
             )
         ];
 
@@ -124,20 +113,16 @@ function moveNoButton() {
 }
 
 
-/*
-    PC
+// ================================
+// PC VERSION 🖥️
+// ================================
 
-    If the mouse gets close,
-    the button escapes.
-*/
+// When the mouse gets close,
+// NO runs away.
 
 document.addEventListener(
     "mousemove",
     function (event) {
-
-        if (window.innerWidth <= 600) {
-            return;
-        }
 
         const rect =
             noButton.getBoundingClientRect();
@@ -165,7 +150,9 @@ document.addEventListener(
             );
 
 
-        if (distance < 100) {
+        // 120px danger zone 😂
+
+        if (distance < 120) {
 
             moveNoButton();
 
@@ -175,11 +162,12 @@ document.addEventListener(
 );
 
 
-/*
-    PHONE
+// ================================
+// PHONE VERSION 📱
+// ================================
 
-    Touching NO makes it escape.
-*/
+// When she touches NO,
+// it teleports somewhere else.
 
 noButton.addEventListener(
     "touchstart",
@@ -193,10 +181,7 @@ noButton.addEventListener(
 );
 
 
-/*
-    Backup for clicking NO
-*/
-
+// Backup if she somehow clicks it
 noButton.addEventListener(
     "click",
     function (event) {
@@ -209,9 +194,9 @@ noButton.addEventListener(
 );
 
 
-/*
-    Heart explosion when YES is pressed
-*/
+// ================================
+// HEART EXPLOSION 💕
+// ================================
 
 function createHeartExplosion() {
 
@@ -224,11 +209,8 @@ function createHeartExplosion() {
         "🌸"
     ];
 
-    for (
-        let i = 0;
-        i < 25;
-        i++
-    ) {
+
+    for (let i = 0; i < 25; i++) {
 
         const heart =
             document.createElement("div");
@@ -240,6 +222,7 @@ function createHeartExplosion() {
                     hearts.length
                 )
             ];
+
 
         heart.style.position =
             "fixed";
@@ -263,6 +246,7 @@ function createHeartExplosion() {
 
         heart.style.transition =
             "transform 3s ease, opacity 3s ease";
+
 
         document.body.appendChild(
             heart
